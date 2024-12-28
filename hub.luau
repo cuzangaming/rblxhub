@@ -51,13 +51,13 @@ if hit.Parent:FindFirstChild("Humanoid") then
 	print("hit")
 local inspawn = Instance.new("BoolValue",hit.Parent)
 inspawn.Name = "Spawn"
-inspawn.value = true
+inspawn.Value = true
 end
 end)
             for i, Victim in pairs(Players:GetPlayers()) do
 
                 if Victim.Name ~= game.Players.LocalPlayer.Name then
-			if Victim.Character:FindFirstChild("Spawn") == true then return end
+			if Victim.Character:FindFirstChild("Spawn").Value == true then return end
                     repeat wait()
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Victim.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)
                     until Victim.Character.Humanoid.Health == 0
