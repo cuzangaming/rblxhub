@@ -63,7 +63,7 @@ universal:CreateButton({
                 BG.P = 9e4
                 BG.maxTorque = Vector3.new(9e9, 9e9, 9e9)
                 BG.cframe = T.CFrame
-                BV.velocity = Vector3.new(0, 0.1, 0)
+                BV.velocity = Vector3.new(0, 50, 0) -- Upward velocity to make the character fly
                 BV.maxForce = Vector3.new(9e9, 9e9, 9e9)
 
                 spawn(function()
@@ -77,14 +77,14 @@ universal:CreateButton({
                         if (CONTROL.L + CONTROL.R) ~= 0 or (CONTROL.F + CONTROL.B) ~= 0 then
                             BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (CONTROL.F + CONTROL.B)) + 
                                 ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(CONTROL.L + CONTROL.R, (CONTROL.F + CONTROL.B) * 0.2, 0).p) - 
-                                workspace.CurrentCamera.CoordinateFrame.p)) * SPEED
+                                workspace.CurrentCamera.CoordinateFrame.p)) * SPEED + Vector3.new(0, 50, 0) -- Keep upward force
                             lCONTROL = {F = CONTROL.F, B = CONTROL.B, L = CONTROL.L, R = CONTROL.R}
                         elseif (CONTROL.L + CONTROL.R) == 0 and (CONTROL.F + CONTROL.B) == 0 and SPEED ~= 0 then
                             BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (lCONTROL.F + lCONTROL.B)) + 
                                 ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(lCONTROL.L + lCONTROL.R, 
-                                (lCONTROL.F + lCONTROL.B) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SPEED
+                                (lCONTROL.F + lCONTROL.B) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SPEED + Vector3.new(0, 50, 0)
                         else
-                            BV.velocity = Vector3.new(0, 0.1, 0)
+                            BV.velocity = Vector3.new(0, 50, 0) -- Ensure upward velocity when not moving horizontally
                         end
                         BG.cframe = workspace.CurrentCamera.CoordinateFrame
                     until not flying
@@ -155,7 +155,7 @@ Mouse.KeyDown:Connect(function(k)
                 BG.P = 9e4
                 BG.maxTorque = Vector3.new(9e9, 9e9, 9e9)
                 BG.cframe = T.CFrame
-                BV.velocity = Vector3.new(0, 0.1, 0)
+                BV.velocity = Vector3.new(0, 50, 0) -- Upward velocity to make the character fly
                 BV.maxForce = Vector3.new(9e9, 9e9, 9e9)
 
                 spawn(function()
@@ -169,14 +169,14 @@ Mouse.KeyDown:Connect(function(k)
                         if (CONTROL.L + CONTROL.R) ~= 0 or (CONTROL.F + CONTROL.B) ~= 0 then
                             BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (CONTROL.F + CONTROL.B)) + 
                                 ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(CONTROL.L + CONTROL.R, (CONTROL.F + CONTROL.B) * 0.2, 0).p) - 
-                                workspace.CurrentCamera.CoordinateFrame.p)) * SPEED
+                                workspace.CurrentCamera.CoordinateFrame.p)) * SPEED + Vector3.new(0, 50, 0) -- Keep upward force
                             lCONTROL = {F = CONTROL.F, B = CONTROL.B, L = CONTROL.L, R = CONTROL.R}
                         elseif (CONTROL.L + CONTROL.R) == 0 and (CONTROL.F + CONTROL.B) == 0 and SPEED ~= 0 then
                             BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (lCONTROL.F + lCONTROL.B)) + 
                                 ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(lCONTROL.L + lCONTROL.R, 
-                                (lCONTROL.F + lCONTROL.B) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SPEED
+                                (lCONTROL.F + lCONTROL.B) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SPEED + Vector3.new(0, 50, 0)
                         else
-                            BV.velocity = Vector3.new(0, 0.1, 0)
+                            BV.velocity = Vector3.new(0, 50, 0) -- Ensure upward velocity when not moving horizontally
                         end
                         BG.cframe = workspace.CurrentCamera.CoordinateFrame
                     until not flying
@@ -223,6 +223,8 @@ Mouse.KeyDown:Connect(function(k)
         end
     end
 })
+
+
 
 -- Fling Function
 local function Fling()
