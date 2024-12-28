@@ -185,8 +185,8 @@ mm2:CreateButton({Name = "Everyone ESP", Callback = function()
 				ESPToggle = false
 				pcall(ClearESP)
 			end
-		end)
-end)})
+		
+end})
 
     print("Script loaded for MM2")
 else
