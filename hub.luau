@@ -51,15 +51,28 @@ function MakeESP()
                 bgui.Size = UDim2.new(0, 200, 0, 50)
 
                 local nam = Instance.new("TextLabel", bgui)
-                nam.Text = player.Name
                 nam.BackgroundTransparency = 1
                 nam.TextSize = 15
                 nam.Font = Enum.Font.GothamBold
-                nam.TextColor3 = Color3.new(1, 1, 1) -- White color
                 nam.Size = UDim2.new(0, 200, 0, 50)
 
-                -- Apply colored SurfaceGuis for each body part
-                applyColorToBodyParts(player.Character, Color3.new(1, 1, 1)) -- Default white color
+                -- Check for roles (Murderer, Sheriff, or default)
+                local isMurderer = player.Backpack:FindFirstChild("Knife") or player.Character:FindFirstChild("Knife")
+                local isSheriff = player.Backpack:FindFirstChild("Gun") or player.Character:FindFirstChild("Gun")
+
+                if isMurderer then
+                    nam.Text = "[Murderer] " .. player.Name
+                    nam.TextColor3 = Color3.new(1, 0, 0) -- Red for Murderer
+                    applyColorToBodyParts(player.Character, Color3.new(1, 0, 0)) -- Red
+                elseif isSheriff then
+                    nam.Text = "[Sheriff] " .. player.Name
+                    nam.TextColor3 = Color3.new(0, 0, 1) -- Blue for Sheriff
+                    applyColorToBodyParts(player.Character, Color3.new(0, 0, 1)) -- Blue
+                else
+                    nam.Text = player.Name
+                    nam.TextColor3 = Color3.new(1, 1, 1) -- White for others
+                    applyColorToBodyParts(player.Character, Color3.new(1, 1, 1)) -- White
+                end
             else
                 print("Skipping ESP for: " .. player.Name .. " (Missing required parts)")
             end
@@ -95,6 +108,7 @@ function applyColorToBodyParts(character, color)
         end
     end
 end
+
 
 
 
