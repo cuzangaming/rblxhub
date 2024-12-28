@@ -1,3 +1,5 @@
+print(game.PlaceId)
+
 local Rayfield = loadstring(game:HttpGet(('https://raw.githubusercontent.com/cuzangaming/rblxhub/refs/heads/main/main')))()
 
 local Window = Rayfield:CreateWindow({
@@ -32,7 +34,6 @@ welcome:CreateSection("Game ID: " .. game.PlaceId .. " | Game Name: " .. gamenam
 
 
 
-print(game.PlaceId)
 if game.PlaceId == 142823291 then
     local mm2 = Window:CreateTab("MM2", 4483362458) 
 
