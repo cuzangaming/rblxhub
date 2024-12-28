@@ -32,49 +32,95 @@ welcome:CreateSection("Game ID: " .. game.PlaceId .. " | Game Name: " .. gamenam
 local universal = Window:CreateTab("Universal", 4483362458)
 universal:CreateSection("Universal Exploits")
 
--- Variables for Fly
+-- Fly Function
 local flying = false
 local speed = 50
+local flyConnection
 
--- Fly Function
 local function Fly()
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-    local bodyVelocity = Instance.new("BodyVelocity", humanoidRootPart)
-    bodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-    bodyVelocity.Velocity = Vector3.zero
 
+    -- Start Fly
     flying = true
+    humanoidRootPart.Anchored = false
 
-    game:GetService("RunService").Stepped:Connect(function()
-        if flying then
-            local moveDirection = Vector3.new(
-                (game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.W) and speed or 0) - 
-                (game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.S) and speed or 0),
-                (game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) and speed or 0) - 
-                (game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) and speed or 0),
-                (game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.A) and speed or 0) - 
-                (game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.D) and speed or 0)
-            )
-            bodyVelocity.Velocity = moveDirection
-        else
-            bodyVelocity:Destroy()
+    flyConnection = game:GetService("RunService").RenderStepped:Connect(function()
+        local moveDirection = Vector3.zero
+
+        -- Check for input
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.W) then
+            moveDirection += Vector3.new(0, 0, -1)
         end
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.S) then
+            moveDirection += Vector3.new(0, 0, 1)
+        end
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.A) then
+            moveDirection += Vector3.new(-1, 0, 0)
+        end
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.D) then
+            moveDirection += Vector3.new(1, 0, 0)
+        end
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) then
+            moveDirection += Vector3.new(0, 1, 0)
+        end
+        if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then
+            moveDirection += Vector3.new(0, -1, 0)
+        end
+
+        -- Move player
+        humanoidRootPart.Velocity = moveDirection.Unit * speed
     end)
+end
+
+local function StopFly()
+    flying = false
+    if flyConnection then
+        flyConnection:Disconnect()
+        flyConnection = nil
+    end
+
+    local player = game.Players.LocalPlayer
+    local character = player.Character
+    if character then
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            humanoidRootPart.Velocity = Vector3.zero
+        end
+    end
 end
 
 universal:CreateButton({
     Name = "Toggle Fly",
     Callback = function()
-        flying = not flying
         if flying then
+            StopFly()
+            print("Fly Disabled")
+        else
             Fly()
             print("Fly Enabled")
-        else
-            flying = false
-            print("Fly Disabled")
         end
+    end
+})
+
+-- Fling Function
+local function Fling()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+    local originalVelocity = humanoidRootPart.Velocity
+    humanoidRootPart.Velocity = Vector3.new(1000, 500, 1000) -- Add strong velocity for fling
+    wait(0.1)
+    humanoidRootPart.Velocity = originalVelocity -- Restore velocity
+end
+
+universal:CreateButton({
+    Name = "Fling",
+    Callback = function()
+        Fling()
+        print("Fling executed")
     end
 })
 
@@ -104,22 +150,6 @@ universal:CreateButton({
             noclip = false
             print("Noclip Disabled")
         end
-    end
-})
-
--- Fling Function
-local function Fling()
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
-    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-    humanoidRootPart.Velocity = Vector3.new(0, 500, 0)
-    print("Fling activated!")
-end
-
-universal:CreateButton({
-    Name = "Fling",
-    Callback = function()
-        Fling()
     end
 })
 
