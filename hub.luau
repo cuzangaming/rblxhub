@@ -3,14 +3,14 @@ local Window = Rayfield:CreateWindow({
    Name = "Cuzan's Hub",
    Icon = 0, 
    
-   Theme = "DarkBlue", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+   Theme = "DarkBlue", 
 
    DisableRayfieldPrompts = true,
    DisableBuildWarnings = true, 
 
    ConfigurationSaving = {
       Enabled = true,
-      FolderName = nil, -- Create a custom folder for your hub/game
+      FolderName = nil,
       FileName = "Cuzan Hub"
    },
 
@@ -26,3 +26,8 @@ local welcome = Window:CreateTab("Welcome!", 4483362458)
 local gamename = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name;
 welcome:CreateSection("Welcome ".. game.Players.LocalPlayer.Name.."!")
 local game = welcome:CreateSection("Game ID: ".. game.PlaceId.." | Game Name: ".. gamename)
+
+
+if game.PlaceId == "142823291" then
+   Window:CreateTab("MM2", 4483362458)
+end
