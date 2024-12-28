@@ -205,7 +205,7 @@ universal:CreateButton({
 universal:CreateButton({
     Name = "DEX Explorer V3",
     Callback = function()
-        loadstring(game:HttpGet(('https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/refs/heads/main/Universal/BypassedDarkDexV3.lua')))()
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/cuzangaming/rblxhub/refs/heads/main/dexv3')))()
     end
 })
 universal:CreateButton({
