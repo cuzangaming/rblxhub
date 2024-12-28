@@ -57,6 +57,7 @@ inspawn.Value = true
 end
 end
 end)
+task.wait()
 part:Destroy()
             for i, Victim in pairs(Players:GetPlayers()) do
 
