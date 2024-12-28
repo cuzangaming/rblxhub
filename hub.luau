@@ -40,8 +40,19 @@ if game.PlaceId == 142823291 then
     mm2:CreateButton({
         Name = "Kill All",
         Callback = function()
-            local Players = game:GetService("Players")    
+            local Players = game:GetService("Players")  
+local part = Instance.new("Part", game.Workspace.Lobby)
+part.Position = Vector3.new(4.601, 182.099, 92.32)
+part.Size = Vector3.new(672.9, 67, 760.2)
+part.CanCollide = false
+part.Touched:Connect(function (hit)
+	print(hit.Parent)
+if hit.Parent:FindFirstChild("Humanoid") then
+	print("hit")
+end
+end)
             for i, Victim in pairs(Players:GetPlayers()) do
+
                 if Victim.Name ~= game.Players.LocalPlayer.Name then
                     repeat wait()
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Victim.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)
