@@ -46,14 +46,18 @@ part.Position = Vector3.new(4.601, 182.099, 92.32)
 part.Size = Vector3.new(672.9, 67, 760.2)
 part.CanCollide = false
 part.Touched:Connect(function (hit)
-	print(hit.Parent)
+	--print(hit.Parent)
 if hit.Parent:FindFirstChild("Humanoid") then
 	print("hit")
+local inspawn = Instance.new("BoolValue",hit.Parent)
+inspawn.Name = "Spawn"
+inspawn.value = true
 end
 end)
             for i, Victim in pairs(Players:GetPlayers()) do
 
                 if Victim.Name ~= game.Players.LocalPlayer.Name then
+			if Victim.Character:FindFirstChild("Spawn") == true then return end
                     repeat wait()
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Victim.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)
                     until Victim.Character.Humanoid.Health == 0
