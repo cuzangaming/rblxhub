@@ -35,6 +35,112 @@ welcome:CreateSection("Game ID: " .. game.PlaceId .. " | Game Name: " .. gamenam
 
 
 if game.PlaceId == 142823291 then
+
+local ESPToggle = false
+	
+	local plrs = game:GetService("Players")
+	local faces = {"Back","Bottom","Front","Left","Right","Top"}
+	function MakeESP()
+		for _, v in pairs(game.Players:GetChildren()) do if v.Name ~= game.Players.LocalPlayer.Name then
+				local bgui = Instance.new("BillboardGui",v.Character.Head)
+				bgui.Name = ("EGUI")
+				bgui.AlwaysOnTop = true
+				bgui.ExtentsOffset = Vector3.new(0,2,0)
+				bgui.Size = UDim2.new(0,200,0,50)
+				local nam = Instance.new("TextLabel",bgui)
+				nam.Text = v.Name
+				nam.BackgroundTransparency = 1
+				nam.TextSize = 15
+				nam.Font = ("GothamBold")
+				nam.TextColor3 = Color3.new(255,255,255)
+				nam.Size = UDim2.new(0,200,0,50)
+				if v.Backpack:FindFirstChild("Gun") or v.Character:FindFirstChild("Gun") then
+					for _, p in pairs(v.Character:GetChildren()) do
+						if p.Name == ("Head") or p.Name == ("Torso") or p.Name == ("Right Arm") or p.Name == ("Right Leg") or p.Name == ("Left Arm") or p.Name == ("Left Leg") then 
+							for _, f in pairs(faces) do
+								local m = Instance.new("SurfaceGui",p)
+								m.Name = ("EGUI")
+								m.Face = f
+								m.AlwaysOnTop = true
+								local mf = Instance.new("Frame",m)
+								mf.Size = UDim2.new(1,0,1,0)
+								mf.BorderSizePixel = 0
+								mf.BackgroundTransparency = 0.5
+								mf.BackgroundColor3 = Color3.new(0,0,255)
+							end
+						end
+					end
+				elseif v.Backpack:FindFirstChild("Knife") or v.Character:FindFirstChild("Knife") then
+					for _, p in pairs(v.Character:GetChildren()) do
+						if p.Name == ("Head") or p.Name == ("Torso") or p.Name == ("Right Arm") or p.Name == ("Right Leg") or p.Name == ("Left Arm") or p.Name == ("Left Leg") then 
+							for _, f in pairs(faces) do
+								local m = Instance.new("SurfaceGui",p)
+								m.Name = ("EGUI")
+								m.Face = f
+								m.AlwaysOnTop = true
+								local mf = Instance.new("Frame",m)
+								mf.Size = UDim2.new(1,0,1,0)
+								mf.BorderSizePixel = 0
+								mf.BackgroundTransparency = 0.5
+								mf.BackgroundColor3 = Color3.new(255,0,0)
+							end
+						end
+					end
+				else
+					for _, p in pairs(v.Character:GetChildren()) do
+						if p.Name == ("Head") or p.Name == ("Torso") or p.Name == ("Right Arm") or p.Name == ("Right Leg") or p.Name == ("Left Arm") or p.Name == ("Left Leg") then 
+							for _, f in pairs(faces) do
+								local m = Instance.new("SurfaceGui",p)
+								m.Name = ("EGUI")
+								m.Face = f
+								m.AlwaysOnTop = true
+								local mf = Instance.new("Frame",m)
+								mf.Size = UDim2.new(1,0,1,0)
+								mf.BorderSizePixel = 0
+								mf.BackgroundTransparency = 0.5
+								mf.BackgroundColor3 = Color3.new(255,255,255)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	
+	function ClearESP()
+		for _, v in pairs(game.Workspace:GetDescendants()) do
+			if v.Name == ("EGUI") then
+				v:Remove()
+			end
+		end
+	end
+
+	
+	game:GetService("Players").PlayerAdded:Connect(function(v)
+		if ESPToggle == true then
+			wait(1)
+			pcall(ClearESP)
+			pcall(MakeESP)
+		end
+	end)
+	
+	game:GetService("Players").PlayerRemoving:Connect(function(v)
+		if ESPToggle == true then
+			wait(1)
+			pcall(ClearESP)
+			pcall(MakeESP)
+		end
+	end)
+	
+	while wait(60) do
+		if ESPToggle == true then
+			wait(1)
+			pcall(ClearESP)
+			pcall(MakeESP)
+		end
+	end
+
+
     local mm2 = Window:CreateTab("MM2", 4483362458) 
 	mm2:CreateSection("Murder Section")
     mm2:CreateButton({
@@ -70,6 +176,17 @@ part:Destroy()
             end
         end,
     })
+mm2:CreateButton({Name = "Everyone ESP", Callback = function()
+	if ESPToggle == false then
+				ESPToggle = true
+				pcall(ClearESP)
+				pcall(MakeESP)
+			else
+				ESPToggle = false
+				pcall(ClearESP)
+			end
+		end)
+end)})
 
     print("Script loaded for MM2")
 else
