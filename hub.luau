@@ -28,6 +28,6 @@ welcome:CreateSection("Welcome ".. game.Players.LocalPlayer.Name.."!")
 local game = welcome:CreateSection("Game ID: ".. game.PlaceId.." | Game Name: ".. gamename)
 
 
-if game.PlaceId == "142823291" then
+if game.PlaceId == 142823291 then
    Window:CreateTab("123!", 4483362458) 
 end
