@@ -33,7 +33,7 @@ welcome:CreateSection("Game ID: " .. game.PlaceId .. " | Game Name: " .. gamenam
 
 
 
-
+print(game.PlaceId)
 if game.PlaceId == 142823291 then
     local mm2 = Window:CreateTab("MM2", 4483362458) 
 
