@@ -154,6 +154,7 @@ game:GetService("Players").PlayerAdded:Connect(function(v)
 			pcall(ClearESP)
 			pcall(MakeESP)
 		end
+	end
 
     mm2:CreateButton({
         Name = "Everyone ESP",
