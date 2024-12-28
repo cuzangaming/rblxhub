@@ -117,19 +117,19 @@ function ClearESP()
 
 
  local mm2 =  Window:CreateTab("MM2", 4483362458) 
-   local Button = mm2:CreateButton({
-   Name = "ESP ALL",
-   Callback = function()
-      if ESPToggle == false then
-				ESPToggle = true
-				pcall(ClearESP)
-				pcall(MakeESP)
-			else
-				ESPToggle = false
-				pcall(ClearESP)
-			end
-   end,
-})
+    mm2:CreateButton({
+      Name = "ESP ALL",
+      Callback = function()
+         if ESPToggle == false then
+            ESPToggle = true
+            pcall(ClearESP)
+            pcall(MakeESP)
+         else
+            ESPToggle = false
+            pcall(ClearESP)
+         end
+      end,
+   })
 
    print("yeah")
 else
