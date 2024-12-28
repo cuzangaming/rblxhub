@@ -723,7 +723,7 @@ local function LoadConfiguration(Configuration)
 		else
 			warn("Rayfield | Unable to find '"..FlagName.. "' in the save file.")
 			print("The error above may not be an issue if new elements have been added or not been set values.")
-			--RayfieldLibrary:Notify({Title = "Rayfield Flags", Content = "Rayfield was unable to find '"..FlagName.. "' in the save file. Check sirius.menu/discord for help.", Image = 3944688398})
+			--RayfieldLibrary:Notify({Title = "Rayfield Flags", Content = "Rayfield was unable to find '"..FlagName.. "' in the save file. ", Image = 3944688398})
 		end
 	end
 
@@ -822,7 +822,7 @@ function RayfieldLibrary:Notify(data) -- action e.g open messages
 
 		if data.Actions then
 			warn('Rayfield | Not seeing your actions in notifications?')
-			print("Notification Actions are being sunset for now, keep up to date on when they're back in the discord. (sirius.menu/discord)")
+			print("Notification Actions are being sunset for now, keep up to date on when they're back in the discord. ")
 		end
 
 		-- Calculate textbounds and set initial values
@@ -1296,7 +1296,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				task.wait(math.random(180, 600))
 				RayfieldLibrary:Notify({
 					Title = "Rayfield Interface",
-					Content = "Enjoying this UI library? Find it at sirius.menu/discord",
+					Content = "Enjoying this UI library? Find it at ",
 					Duration = 7,
 					Image = 4370033185,
 				})
