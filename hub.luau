@@ -203,9 +203,15 @@ universal:CreateButton({
 
 -- Placeholder for additional exploits
 universal:CreateButton({
-    Name = "Coming Soon",
+    Name = "DEX Explorer V3",
     Callback = function()
-        print("More exploits will be added here!")
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/refs/heads/main/Universal/BypassedDarkDexV3.lua')))()
+    end
+})
+universal:CreateButton({
+    Name = "IY",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
     end
 })
 -- Universal ESP toggle
