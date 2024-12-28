@@ -121,28 +121,37 @@ universal:CreateButton({
     end
 })
 
--- Fling Function (now toggleable and less detectable)
+-- Fling Function (Improved with Infinite Yield Handling)
 local flingActive = false
+
 local function Fling()
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-
-    -- Ensure the player has a valid character before modifying velocity
+    
+    -- Ensure the HumanoidRootPart is valid before proceeding
     if humanoidRootPart and character:FindFirstChild("Humanoid") then
         local originalVelocity = humanoidRootPart.Velocity
-        -- Apply the fling velocity using BodyVelocity (less detectable than modifying direct Velocity)
+        
+        -- Apply a BodyVelocity for the fling effect
         local bodyVelocity = Instance.new("BodyVelocity")
-        bodyVelocity.MaxForce = Vector3.new(10000, 10000, 10000) -- Very high force, for fling effect
-        bodyVelocity.Velocity = Vector3.new(1000, 500, 1000)  -- Strong velocity for fling
+        bodyVelocity.MaxForce = Vector3.new(10000, 10000, 10000)  -- Extremely high force for fling
+        bodyVelocity.Velocity = Vector3.new(1000, 500, 1000)  -- Strong fling velocity
         bodyVelocity.Parent = humanoidRootPart
 
-        -- Cleanup the BodyVelocity instance after 0.1 seconds to make it undetectable
-        game:GetService("Debris"):AddItem(bodyVelocity, 0.1)
-        
-        -- Restore original velocity immediately after fling effect
-        wait(0.1)
+        -- Set a timeout for body velocity to prevent it from lingering
+        local flingTimeout = 0.1  -- 100ms fling effect duration
+
+        -- Remove BodyVelocity after fling duration to avoid long-term manipulation
+        game:GetService("Debris"):AddItem(bodyVelocity, flingTimeout)
+
+        -- Restore original velocity after a brief delay
+        wait(flingTimeout)
         humanoidRootPart.Velocity = originalVelocity
+
+        print("Fling applied")
+    else
+        print("Fling failed: HumanoidRootPart or Humanoid not found")
     end
 end
 
@@ -151,13 +160,14 @@ universal:CreateButton({
     Callback = function()
         flingActive = not flingActive
         if flingActive then
-            Fling()
+            Fling()  -- Trigger fling function when the button is clicked
             print("Fling activated")
         else
             print("Fling deactivated")
         end
     end
 })
+
 
 
 -- Noclip Function
@@ -189,17 +199,7 @@ universal:CreateButton({
     end
 })
 
--- Speed Modifier
-universal:CreateSlider({
-    Name = "Set Fly Speed",
-    Min = 10,
-    Max = 200,
-    Default = 50,
-    Callback = function(value)
-        speedfly = value
-        print("Fly speed set to: " .. value)
-    end
-})
+
 
 -- Placeholder for additional exploits
 universal:CreateButton({
