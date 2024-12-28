@@ -49,11 +49,15 @@ part.Touched:Connect(function (hit)
 	--print(hit.Parent)
 if hit.Parent:FindFirstChild("Humanoid") then
 	print("hit")
+if hit.Parent.Spawn == nil then
+
 local inspawn = Instance.new("BoolValue",hit.Parent)
 inspawn.Name = "Spawn"
 inspawn.Value = true
 end
+end
 end)
+part:Destroy()
             for i, Victim in pairs(Players:GetPlayers()) do
 
                 if Victim.Name ~= game.Players.LocalPlayer.Name then
