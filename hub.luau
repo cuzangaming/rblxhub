@@ -23,7 +23,6 @@ local welcome = Window:CreateTab("Welcome!", 4483362458)
 local MarketplaceService = game:GetService("MarketplaceService")
 local gameInfo = MarketplaceService:GetProductInfo(game.PlaceId)
 local gamename = gameInfo.Name
-local ESPToggle = false
 
 welcome:CreateSection("Welcome ".. game.Players.LocalPlayer.Name .. "!")
 welcome:CreateSection("Game ID: " .. game.PlaceId .. " | Game Name: " .. gamename)
