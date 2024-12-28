@@ -36,7 +36,7 @@ welcome:CreateSection("Game ID: " .. game.PlaceId .. " | Game Name: " .. gamenam
 
 if game.PlaceId == 142823291 then
     local mm2 = Window:CreateTab("MM2", 4483362458) 
-
+	mm2:CreateSection("Murder Section")
     mm2:CreateButton({
         Name = "Kill All",
         Callback = function()
