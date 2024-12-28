@@ -132,6 +132,28 @@ end
             end
         end,
     })
+game:GetService("Players").PlayerAdded:Connect(function(v)
+		if ESPToggle == true then
+			wait(1)
+			pcall(ClearESP)
+			pcall(MakeESP)
+		end
+	end)
+	
+	game:GetService("Players").PlayerRemoving:Connect(function(v)
+		if ESPToggle == true then
+			wait(1)
+			pcall(ClearESP)
+			pcall(MakeESP)
+		end
+	end)
+	
+	while wait(60) do
+		if ESPToggle == true then
+			wait(1)
+			pcall(ClearESP)
+			pcall(MakeESP)
+		end
 
     mm2:CreateButton({
         Name = "Everyone ESP",
