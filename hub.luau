@@ -132,6 +132,22 @@ end
             end
         end,
     })
+
+
+    mm2:CreateButton({
+        Name = "Everyone ESP",
+        Callback = function()
+            ESPToggle = not ESPToggle
+            if ESPToggle then
+                print("ESP Enabled") -- Debug message
+                pcall(ClearESP)
+                pcall(MakeESP)
+            else
+                print("ESP Disabled") -- Debug message
+                pcall(ClearESP)
+            end
+        end
+    })
 game:GetService("Players").PlayerAdded:Connect(function(v)
 		if ESPToggle == true then
 			wait(1)
@@ -155,22 +171,6 @@ game:GetService("Players").PlayerAdded:Connect(function(v)
 			pcall(MakeESP)
 		end
 	end
-
-    mm2:CreateButton({
-        Name = "Everyone ESP",
-        Callback = function()
-            ESPToggle = not ESPToggle
-            if ESPToggle then
-                print("ESP Enabled") -- Debug message
-                pcall(ClearESP)
-                pcall(MakeESP)
-            else
-                print("ESP Disabled") -- Debug message
-                pcall(ClearESP)
-            end
-        end
-    })
-
     print("MM2 tab successfully created!")
 else
     print("This script is not for the current game.")
