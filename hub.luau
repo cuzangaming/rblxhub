@@ -114,20 +114,46 @@ function ClearESP()
 
 
 
+game:GetService("Players").PlayerAdded:Connect(function(v)
+		if ESPToggle == true then
+			wait(1)
+			pcall(ClearESP)
+			pcall(MakeESP)
+		end
+	end)
+	
+	game:GetService("Players").PlayerRemoving:Connect(function(v)
+		if ESPToggle == true then
+			wait(1)
+			pcall(ClearESP)
+			pcall(MakeESP)
+		end
+	end)
+	
+	while wait(60) do
+		if ESPToggle == true then
+			wait(1)
+			pcall(ClearESP)
+			pcall(MakeESP)
+		end
+	end
 
 
  local mm2 =  Window:CreateTab("MM2", 4483362458) 
     mm2:CreateButton({
-      Name = "ESP ALL",
+      Name = "Kill All",
       Callback = function()
-         if ESPToggle == false then
-            ESPToggle = true
-            pcall(ClearESP)
-            pcall(MakeESP)
-         else
-            ESPToggle = false
-            pcall(ClearESP)
-         end
+         local Players = game:GetService("Players")	
+			    for i, Victim in pairs(Players:GetPlayers()) do
+			        if Victim.Name ~= game.Players.LocalPlayer.Name then
+			
+			            repeat wait()
+			                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Victim.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)
+			            until
+				                Victim.Character.Humanoid.Health == 0
+				end
+			end
+
       end,
    })
 
